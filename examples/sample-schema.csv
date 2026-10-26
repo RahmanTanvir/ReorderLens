@@ -1,0 +1,4 @@
+date,product_id,product_name,quantity_sold
+2026-10-01,sku-a,Illustrative Product A,5
+2026-10-02,sku-a,Illustrative Product A,0
+2026-10-03,sku-a,Illustrative Product A,8

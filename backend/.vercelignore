@@ -1,0 +1,9 @@
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+tests/
+generate_demo_csv.py
+requirements-dev.txt
+pytest.ini
+README.md

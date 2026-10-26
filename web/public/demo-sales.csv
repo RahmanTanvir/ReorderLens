@@ -1,0 +1,361 @@
+date,product_id,product_name,quantity_sold
+2026-06-29,rice-1kg,Miniket Rice 1kg (Synthetic Demo),17
+2026-06-30,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-07-01,rice-1kg,Miniket Rice 1kg (Synthetic Demo),19
+2026-07-02,rice-1kg,Miniket Rice 1kg (Synthetic Demo),24
+2026-07-03,rice-1kg,Miniket Rice 1kg (Synthetic Demo),26
+2026-07-04,rice-1kg,Miniket Rice 1kg (Synthetic Demo),24
+2026-07-05,rice-1kg,Miniket Rice 1kg (Synthetic Demo),13
+2026-07-06,rice-1kg,Miniket Rice 1kg (Synthetic Demo),17
+2026-07-07,rice-1kg,Miniket Rice 1kg (Synthetic Demo),16
+2026-07-08,rice-1kg,Miniket Rice 1kg (Synthetic Demo),21
+2026-07-09,rice-1kg,Miniket Rice 1kg (Synthetic Demo),22
+2026-07-10,rice-1kg,Miniket Rice 1kg (Synthetic Demo),29
+2026-07-11,rice-1kg,Miniket Rice 1kg (Synthetic Demo),23
+2026-07-12,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-07-13,rice-1kg,Miniket Rice 1kg (Synthetic Demo),17
+2026-07-14,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-07-15,rice-1kg,Miniket Rice 1kg (Synthetic Demo),19
+2026-07-16,rice-1kg,Miniket Rice 1kg (Synthetic Demo),25
+2026-07-17,rice-1kg,Miniket Rice 1kg (Synthetic Demo),24
+2026-07-18,rice-1kg,Miniket Rice 1kg (Synthetic Demo),0
+2026-07-19,rice-1kg,Miniket Rice 1kg (Synthetic Demo),16
+2026-07-20,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-07-21,rice-1kg,Miniket Rice 1kg (Synthetic Demo),19
+2026-07-22,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-07-23,rice-1kg,Miniket Rice 1kg (Synthetic Demo),23
+2026-07-24,rice-1kg,Miniket Rice 1kg (Synthetic Demo),25
+2026-07-25,rice-1kg,Miniket Rice 1kg (Synthetic Demo),25
+2026-07-26,rice-1kg,Miniket Rice 1kg (Synthetic Demo),16
+2026-07-27,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-07-28,rice-1kg,Miniket Rice 1kg (Synthetic Demo),16
+2026-07-29,rice-1kg,Miniket Rice 1kg (Synthetic Demo),20
+2026-07-30,rice-1kg,Miniket Rice 1kg (Synthetic Demo),25
+2026-07-31,rice-1kg,Miniket Rice 1kg (Synthetic Demo),25
+2026-08-01,rice-1kg,Miniket Rice 1kg (Synthetic Demo),24
+2026-08-02,rice-1kg,Miniket Rice 1kg (Synthetic Demo),17
+2026-08-03,rice-1kg,Miniket Rice 1kg (Synthetic Demo),17
+2026-08-04,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-08-05,rice-1kg,Miniket Rice 1kg (Synthetic Demo),21
+2026-08-06,rice-1kg,Miniket Rice 1kg (Synthetic Demo),25
+2026-08-07,rice-1kg,Miniket Rice 1kg (Synthetic Demo),28
+2026-08-08,rice-1kg,Miniket Rice 1kg (Synthetic Demo),26
+2026-08-09,rice-1kg,Miniket Rice 1kg (Synthetic Demo),17
+2026-08-10,rice-1kg,Miniket Rice 1kg (Synthetic Demo),17
+2026-08-11,rice-1kg,Miniket Rice 1kg (Synthetic Demo),19
+2026-08-12,rice-1kg,Miniket Rice 1kg (Synthetic Demo),22
+2026-08-13,rice-1kg,Miniket Rice 1kg (Synthetic Demo),25
+2026-08-14,rice-1kg,Miniket Rice 1kg (Synthetic Demo),27
+2026-08-15,rice-1kg,Miniket Rice 1kg (Synthetic Demo),27
+2026-08-16,rice-1kg,Miniket Rice 1kg (Synthetic Demo),19
+2026-08-17,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-08-18,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-08-19,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-08-20,rice-1kg,Miniket Rice 1kg (Synthetic Demo),25
+2026-08-21,rice-1kg,Miniket Rice 1kg (Synthetic Demo),31
+2026-08-22,rice-1kg,Miniket Rice 1kg (Synthetic Demo),27
+2026-08-23,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-08-24,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-08-25,rice-1kg,Miniket Rice 1kg (Synthetic Demo),23
+2026-08-26,rice-1kg,Miniket Rice 1kg (Synthetic Demo),22
+2026-08-27,rice-1kg,Miniket Rice 1kg (Synthetic Demo),23
+2026-08-28,rice-1kg,Miniket Rice 1kg (Synthetic Demo),29
+2026-08-29,rice-1kg,Miniket Rice 1kg (Synthetic Demo),0
+2026-08-30,rice-1kg,Miniket Rice 1kg (Synthetic Demo),11
+2026-08-31,rice-1kg,Miniket Rice 1kg (Synthetic Demo),15
+2026-09-01,rice-1kg,Miniket Rice 1kg (Synthetic Demo),19
+2026-09-02,rice-1kg,Miniket Rice 1kg (Synthetic Demo),24
+2026-09-03,rice-1kg,Miniket Rice 1kg (Synthetic Demo),25
+2026-09-04,rice-1kg,Miniket Rice 1kg (Synthetic Demo),29
+2026-09-05,rice-1kg,Miniket Rice 1kg (Synthetic Demo),28
+2026-09-06,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-09-07,rice-1kg,Miniket Rice 1kg (Synthetic Demo),19
+2026-09-08,rice-1kg,Miniket Rice 1kg (Synthetic Demo),20
+2026-09-09,rice-1kg,Miniket Rice 1kg (Synthetic Demo),21
+2026-09-10,rice-1kg,Miniket Rice 1kg (Synthetic Demo),29
+2026-09-11,rice-1kg,Miniket Rice 1kg (Synthetic Demo),30
+2026-09-12,rice-1kg,Miniket Rice 1kg (Synthetic Demo),27
+2026-09-13,rice-1kg,Miniket Rice 1kg (Synthetic Demo),17
+2026-09-14,rice-1kg,Miniket Rice 1kg (Synthetic Demo),20
+2026-09-15,rice-1kg,Miniket Rice 1kg (Synthetic Demo),24
+2026-09-16,rice-1kg,Miniket Rice 1kg (Synthetic Demo),19
+2026-09-17,rice-1kg,Miniket Rice 1kg (Synthetic Demo),29
+2026-09-18,rice-1kg,Miniket Rice 1kg (Synthetic Demo),30
+2026-09-19,rice-1kg,Miniket Rice 1kg (Synthetic Demo),29
+2026-09-20,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-09-21,rice-1kg,Miniket Rice 1kg (Synthetic Demo),19
+2026-09-22,rice-1kg,Miniket Rice 1kg (Synthetic Demo),23
+2026-09-23,rice-1kg,Miniket Rice 1kg (Synthetic Demo),23
+2026-09-24,rice-1kg,Miniket Rice 1kg (Synthetic Demo),28
+2026-09-25,rice-1kg,Miniket Rice 1kg (Synthetic Demo),27
+2026-09-26,rice-1kg,Miniket Rice 1kg (Synthetic Demo),27
+2026-09-27,rice-1kg,Miniket Rice 1kg (Synthetic Demo),17
+2026-09-28,rice-1kg,Miniket Rice 1kg (Synthetic Demo),21
+2026-09-29,rice-1kg,Miniket Rice 1kg (Synthetic Demo),23
+2026-09-30,rice-1kg,Miniket Rice 1kg (Synthetic Demo),25
+2026-10-01,rice-1kg,Miniket Rice 1kg (Synthetic Demo),24
+2026-10-02,rice-1kg,Miniket Rice 1kg (Synthetic Demo),33
+2026-10-03,rice-1kg,Miniket Rice 1kg (Synthetic Demo),33
+2026-10-04,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-10-05,rice-1kg,Miniket Rice 1kg (Synthetic Demo),20
+2026-10-06,rice-1kg,Miniket Rice 1kg (Synthetic Demo),22
+2026-10-07,rice-1kg,Miniket Rice 1kg (Synthetic Demo),24
+2026-10-08,rice-1kg,Miniket Rice 1kg (Synthetic Demo),28
+2026-10-09,rice-1kg,Miniket Rice 1kg (Synthetic Demo),34
+2026-10-10,rice-1kg,Miniket Rice 1kg (Synthetic Demo),28
+2026-10-11,rice-1kg,Miniket Rice 1kg (Synthetic Demo),16
+2026-10-12,rice-1kg,Miniket Rice 1kg (Synthetic Demo),22
+2026-10-13,rice-1kg,Miniket Rice 1kg (Synthetic Demo),20
+2026-10-14,rice-1kg,Miniket Rice 1kg (Synthetic Demo),26
+2026-10-15,rice-1kg,Miniket Rice 1kg (Synthetic Demo),28
+2026-10-16,rice-1kg,Miniket Rice 1kg (Synthetic Demo),33
+2026-10-17,rice-1kg,Miniket Rice 1kg (Synthetic Demo),29
+2026-10-18,rice-1kg,Miniket Rice 1kg (Synthetic Demo),18
+2026-10-19,rice-1kg,Miniket Rice 1kg (Synthetic Demo),22
+2026-10-20,rice-1kg,Miniket Rice 1kg (Synthetic Demo),22
+2026-10-21,rice-1kg,Miniket Rice 1kg (Synthetic Demo),23
+2026-10-22,rice-1kg,Miniket Rice 1kg (Synthetic Demo),25
+2026-10-23,rice-1kg,Miniket Rice 1kg (Synthetic Demo),30
+2026-10-24,rice-1kg,Miniket Rice 1kg (Synthetic Demo),31
+2026-10-25,rice-1kg,Miniket Rice 1kg (Synthetic Demo),16
+2026-10-26,rice-1kg,Miniket Rice 1kg (Synthetic Demo),23
+2026-06-29,soap-100g,Neem Bath Soap 100g (Synthetic Demo),3
+2026-06-30,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-07-01,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-07-02,soap-100g,Neem Bath Soap 100g (Synthetic Demo),13
+2026-07-03,soap-100g,Neem Bath Soap 100g (Synthetic Demo),12
+2026-07-04,soap-100g,Neem Bath Soap 100g (Synthetic Demo),9
+2026-07-05,soap-100g,Neem Bath Soap 100g (Synthetic Demo),0
+2026-07-06,soap-100g,Neem Bath Soap 100g (Synthetic Demo),4
+2026-07-07,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-07-08,soap-100g,Neem Bath Soap 100g (Synthetic Demo),5
+2026-07-09,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-07-10,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-07-11,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-07-12,soap-100g,Neem Bath Soap 100g (Synthetic Demo),3
+2026-07-13,soap-100g,Neem Bath Soap 100g (Synthetic Demo),5
+2026-07-14,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-07-15,soap-100g,Neem Bath Soap 100g (Synthetic Demo),10
+2026-07-16,soap-100g,Neem Bath Soap 100g (Synthetic Demo),10
+2026-07-17,soap-100g,Neem Bath Soap 100g (Synthetic Demo),12
+2026-07-18,soap-100g,Neem Bath Soap 100g (Synthetic Demo),13
+2026-07-19,soap-100g,Neem Bath Soap 100g (Synthetic Demo),3
+2026-07-20,soap-100g,Neem Bath Soap 100g (Synthetic Demo),3
+2026-07-21,soap-100g,Neem Bath Soap 100g (Synthetic Demo),5
+2026-07-22,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-07-23,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-07-24,soap-100g,Neem Bath Soap 100g (Synthetic Demo),7
+2026-07-25,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-07-26,soap-100g,Neem Bath Soap 100g (Synthetic Demo),0
+2026-07-27,soap-100g,Neem Bath Soap 100g (Synthetic Demo),3
+2026-07-28,soap-100g,Neem Bath Soap 100g (Synthetic Demo),5
+2026-07-29,soap-100g,Neem Bath Soap 100g (Synthetic Demo),9
+2026-07-30,soap-100g,Neem Bath Soap 100g (Synthetic Demo),10
+2026-07-31,soap-100g,Neem Bath Soap 100g (Synthetic Demo),11
+2026-08-01,soap-100g,Neem Bath Soap 100g (Synthetic Demo),12
+2026-08-02,soap-100g,Neem Bath Soap 100g (Synthetic Demo),1
+2026-08-03,soap-100g,Neem Bath Soap 100g (Synthetic Demo),3
+2026-08-04,soap-100g,Neem Bath Soap 100g (Synthetic Demo),7
+2026-08-05,soap-100g,Neem Bath Soap 100g (Synthetic Demo),4
+2026-08-06,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-08-07,soap-100g,Neem Bath Soap 100g (Synthetic Demo),10
+2026-08-08,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-08-09,soap-100g,Neem Bath Soap 100g (Synthetic Demo),2
+2026-08-10,soap-100g,Neem Bath Soap 100g (Synthetic Demo),2
+2026-08-11,soap-100g,Neem Bath Soap 100g (Synthetic Demo),7
+2026-08-12,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-08-13,soap-100g,Neem Bath Soap 100g (Synthetic Demo),12
+2026-08-14,soap-100g,Neem Bath Soap 100g (Synthetic Demo),13
+2026-08-15,soap-100g,Neem Bath Soap 100g (Synthetic Demo),10
+2026-08-16,soap-100g,Neem Bath Soap 100g (Synthetic Demo),4
+2026-08-17,soap-100g,Neem Bath Soap 100g (Synthetic Demo),3
+2026-08-18,soap-100g,Neem Bath Soap 100g (Synthetic Demo),3
+2026-08-19,soap-100g,Neem Bath Soap 100g (Synthetic Demo),4
+2026-08-20,soap-100g,Neem Bath Soap 100g (Synthetic Demo),7
+2026-08-21,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-08-22,soap-100g,Neem Bath Soap 100g (Synthetic Demo),9
+2026-08-23,soap-100g,Neem Bath Soap 100g (Synthetic Demo),0
+2026-08-24,soap-100g,Neem Bath Soap 100g (Synthetic Demo),5
+2026-08-25,soap-100g,Neem Bath Soap 100g (Synthetic Demo),7
+2026-08-26,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-08-27,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-08-28,soap-100g,Neem Bath Soap 100g (Synthetic Demo),13
+2026-08-29,soap-100g,Neem Bath Soap 100g (Synthetic Demo),10
+2026-08-30,soap-100g,Neem Bath Soap 100g (Synthetic Demo),4
+2026-08-31,soap-100g,Neem Bath Soap 100g (Synthetic Demo),4
+2026-09-01,soap-100g,Neem Bath Soap 100g (Synthetic Demo),3
+2026-09-02,soap-100g,Neem Bath Soap 100g (Synthetic Demo),5
+2026-09-03,soap-100g,Neem Bath Soap 100g (Synthetic Demo),5
+2026-09-04,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-09-05,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-09-06,soap-100g,Neem Bath Soap 100g (Synthetic Demo),5
+2026-09-07,soap-100g,Neem Bath Soap 100g (Synthetic Demo),5
+2026-09-08,soap-100g,Neem Bath Soap 100g (Synthetic Demo),7
+2026-09-09,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-09-10,soap-100g,Neem Bath Soap 100g (Synthetic Demo),10
+2026-09-11,soap-100g,Neem Bath Soap 100g (Synthetic Demo),12
+2026-09-12,soap-100g,Neem Bath Soap 100g (Synthetic Demo),11
+2026-09-13,soap-100g,Neem Bath Soap 100g (Synthetic Demo),5
+2026-09-14,soap-100g,Neem Bath Soap 100g (Synthetic Demo),2
+2026-09-15,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-09-16,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-09-17,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-09-18,soap-100g,Neem Bath Soap 100g (Synthetic Demo),11
+2026-09-19,soap-100g,Neem Bath Soap 100g (Synthetic Demo),9
+2026-09-20,soap-100g,Neem Bath Soap 100g (Synthetic Demo),0
+2026-09-21,soap-100g,Neem Bath Soap 100g (Synthetic Demo),3
+2026-09-22,soap-100g,Neem Bath Soap 100g (Synthetic Demo),7
+2026-09-23,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-09-24,soap-100g,Neem Bath Soap 100g (Synthetic Demo),10
+2026-09-25,soap-100g,Neem Bath Soap 100g (Synthetic Demo),16
+2026-09-26,soap-100g,Neem Bath Soap 100g (Synthetic Demo),11
+2026-09-27,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-09-28,soap-100g,Neem Bath Soap 100g (Synthetic Demo),5
+2026-09-29,soap-100g,Neem Bath Soap 100g (Synthetic Demo),4
+2026-09-30,soap-100g,Neem Bath Soap 100g (Synthetic Demo),1
+2026-10-01,soap-100g,Neem Bath Soap 100g (Synthetic Demo),7
+2026-10-02,soap-100g,Neem Bath Soap 100g (Synthetic Demo),11
+2026-10-03,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-10-04,soap-100g,Neem Bath Soap 100g (Synthetic Demo),2
+2026-10-05,soap-100g,Neem Bath Soap 100g (Synthetic Demo),1
+2026-10-06,soap-100g,Neem Bath Soap 100g (Synthetic Demo),7
+2026-10-07,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-10-08,soap-100g,Neem Bath Soap 100g (Synthetic Demo),10
+2026-10-09,soap-100g,Neem Bath Soap 100g (Synthetic Demo),13
+2026-10-10,soap-100g,Neem Bath Soap 100g (Synthetic Demo),11
+2026-10-11,soap-100g,Neem Bath Soap 100g (Synthetic Demo),0
+2026-10-12,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-10-13,soap-100g,Neem Bath Soap 100g (Synthetic Demo),3
+2026-10-14,soap-100g,Neem Bath Soap 100g (Synthetic Demo),7
+2026-10-15,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-10-16,soap-100g,Neem Bath Soap 100g (Synthetic Demo),9
+2026-10-17,soap-100g,Neem Bath Soap 100g (Synthetic Demo),7
+2026-10-18,soap-100g,Neem Bath Soap 100g (Synthetic Demo),1
+2026-10-19,soap-100g,Neem Bath Soap 100g (Synthetic Demo),3
+2026-10-20,soap-100g,Neem Bath Soap 100g (Synthetic Demo),7
+2026-10-21,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-10-22,soap-100g,Neem Bath Soap 100g (Synthetic Demo),8
+2026-10-23,soap-100g,Neem Bath Soap 100g (Synthetic Demo),13
+2026-10-24,soap-100g,Neem Bath Soap 100g (Synthetic Demo),13
+2026-10-25,soap-100g,Neem Bath Soap 100g (Synthetic Demo),6
+2026-10-26,soap-100g,Neem Bath Soap 100g (Synthetic Demo),5
+2026-06-29,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-06-30,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),11
+2026-07-01,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-07-02,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-07-03,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-07-04,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-07-05,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),7
+2026-07-06,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),10
+2026-07-07,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-07-08,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-07-09,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),10
+2026-07-10,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-07-11,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-07-12,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),0
+2026-07-13,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-07-14,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-07-15,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-07-16,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),9
+2026-07-17,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-07-18,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-07-19,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),9
+2026-07-20,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-07-21,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-07-22,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-07-23,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),10
+2026-07-24,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-07-25,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-07-26,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),9
+2026-07-27,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),11
+2026-07-28,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-07-29,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-07-30,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-07-31,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-08-01,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-08-02,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),10
+2026-08-03,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-08-04,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),11
+2026-08-05,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-08-06,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-08-07,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),17
+2026-08-08,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-08-09,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),7
+2026-08-10,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-08-11,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-08-12,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-08-13,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-08-14,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-08-15,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),19
+2026-08-16,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),0
+2026-08-17,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-08-18,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-08-19,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-08-20,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),11
+2026-08-21,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),19
+2026-08-22,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-08-23,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),9
+2026-08-24,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-08-25,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-08-26,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-08-27,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-08-28,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),17
+2026-08-29,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),17
+2026-08-30,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),11
+2026-08-31,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),11
+2026-09-01,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-09-02,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-09-03,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-09-04,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-09-05,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-09-06,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),9
+2026-09-07,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-09-08,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-09-09,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-09-10,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-09-11,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),17
+2026-09-12,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),17
+2026-09-13,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-09-14,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-09-15,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),11
+2026-09-16,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-09-17,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),12
+2026-09-18,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-09-19,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-09-20,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),9
+2026-09-21,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-09-22,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-09-23,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-09-24,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-09-25,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),17
+2026-09-26,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),19
+2026-09-27,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),0
+2026-09-28,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),10
+2026-09-29,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-09-30,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-10-01,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-10-02,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),18
+2026-10-03,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),18
+2026-10-04,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-10-05,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-10-06,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
+2026-10-07,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),17
+2026-10-08,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-10-09,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),19
+2026-10-10,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),18
+2026-10-11,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),13
+2026-10-12,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-10-13,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-10-14,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-10-15,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-10-16,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),20
+2026-10-17,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-10-18,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),10
+2026-10-19,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-10-20,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),14
+2026-10-21,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-10-22,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),15
+2026-10-23,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),18
+2026-10-24,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),19
+2026-10-25,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),11
+2026-10-26,tea-250g,Sylhet Black Tea 250g (Synthetic Demo),16
