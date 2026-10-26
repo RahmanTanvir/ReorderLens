@@ -7,6 +7,7 @@ import {
   Calculator,
   CheckCircle2,
   Download,
+  FileSpreadsheet,
   Info,
   Loader2,
   PackageCheck,
@@ -20,6 +21,7 @@ import {
 } from "@/lib/api";
 import { ErrorRetry } from "@/components/ErrorRetry";
 import { LimitationsPanel } from "@/components/LimitationsPanel";
+import { formatInteger, formatUnits } from "@/lib/format";
 
 export default function RecommendationsPage() {
   const {
@@ -93,7 +95,9 @@ export default function RecommendationsPage() {
           code: "INVALID_STOCK_INPUT",
           message:
             "Current stock on hand must be a whole integer between 0 and 1,000,000 units.",
-          details: ["Negative, fractional, or empty stock values are not allowed."],
+          details: [
+            "Negative, fractional, or empty stock values are not allowed.",
+          ],
         });
         return;
       }
@@ -267,45 +271,47 @@ export default function RecommendationsPage() {
   if (!analysis) {
     return (
       <div className="space-y-6">
-        <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-2xs">
-          <h1 className="text-xl font-bold text-slate-900">
-            Inventory Reorder Recommendations
-          </h1>
-          <p className="mt-1 text-sm text-slate-600">
-            Enter current stock on hand, supplier lead days (1–14), and optional safety stock to compute deterministic reorder quantities from the 14-day forecast via{" "}
-            <code className="font-mono text-xs">POST /backend/v1/recommendations</code>.
-          </p>
-
-          <div className="mt-6 rounded-lg border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
-            <PackageCheck className="mx-auto h-8 w-8 text-slate-500" aria-hidden="true" />
-            <h2 className="mt-3 text-base font-semibold text-slate-900">
-              No Forecast Loaded in Session
-            </h2>
-            <p className="mx-auto mt-1 max-w-xl text-xs text-slate-600">
-              Import a daily sales CSV or load the built-in synthetic demo dataset first so that SKU forecasts are available for inventory calculation.
+        <section className="rounded-2xl border border-[#DEE6EB] bg-white p-6 sm:p-8 shadow-2xs">
+          <div className="max-w-2xl">
+            <h1 className="text-2xl font-bold tracking-tight text-[#102034]">
+              Turn forecasts into stock decisions
+            </h1>
+            <p className="mt-1 text-sm text-[#536579]">
+              Enter current stock on hand, supplier lead time (1–14 days), and optional safety stock to compute deterministic reorder quantities from the 14-day forecast.
             </p>
-            <p className="mx-auto mt-2 max-w-md rounded border border-amber-300 bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-950">
-              Illustrative synthetic demo data — not real retailer records
+          </div>
+
+          <div className="mt-6 rounded-xl border border-dashed border-[#DEE6EB] bg-[#F6F8FA] p-8 text-center">
+            <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-[#E8F6F4] text-[#087F78]">
+              <PackageCheck className="h-5 w-5" aria-hidden="true" />
+            </div>
+            <h2 className="mt-3 text-base font-semibold text-[#102034]">
+              No active forecast in session
+            </h2>
+            <p className="mx-auto mt-1 max-w-lg text-xs leading-relaxed text-[#536579]">
+              Import a daily sales CSV or load the 3-product sample dataset (`Illustrative synthetic demo data — not real retailer records`) first so SKU forecasts are ready for replenishment math.
             </p>
             <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
               <button
                 type="button"
                 onClick={() => void loadSyntheticDemo()}
                 disabled={isAnalyzing}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-700 px-3.5 py-2 text-xs font-semibold text-white hover:bg-indigo-800 disabled:opacity-50"
+                className="inline-flex items-center gap-2 rounded-xl bg-[#087F78] px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-2xs transition hover:bg-[#0B746E] disabled:opacity-50 cursor-pointer"
               >
-                <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>{isAnalyzing ? "Loading demo..." : "Load synthetic demo"}</span>
+                <Sparkles className="h-4 w-4" aria-hidden="true" />
+                <span>{isAnalyzing ? "Loading sample…" : "Explore sample data"}</span>
               </button>
               <Link
                 href="/import"
-                className="inline-flex items-center rounded-lg border border-slate-300 bg-white px-3.5 py-2 text-xs font-medium text-slate-800 hover:bg-slate-100"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-[#DEE6EB] bg-white px-4 py-2 text-xs sm:text-sm font-semibold text-[#102034] transition hover:bg-[#EFF4F6]"
               >
-                Go to Import Sales
+                <FileSpreadsheet className="h-4 w-4 text-[#536579]" aria-hidden="true" />
+                <span>Import CSV</span>
               </Link>
             </div>
           </div>
         </section>
+        <LimitationsPanel />
       </div>
     );
   }
@@ -319,42 +325,46 @@ export default function RecommendationsPage() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-2xs">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+      <section className="rounded-2xl border border-[#DEE6EB] bg-white p-5 sm:p-6 shadow-2xs">
+        {/* Header Bar + SKU Picker */}
+        <div className="flex flex-col gap-4 border-b border-[#DEE6EB] pb-4 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-xl font-bold text-slate-900">
-                Deterministic Inventory Reorder Recommendations
+              <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-[#102034]">
+                Turn forecasts into stock decisions
               </h1>
               {provenance === "synthetic_demo" ? (
-                <span className="rounded-md border border-amber-300 bg-amber-100 px-2.5 py-0.5 text-xs font-semibold text-amber-950">
+                <span className="rounded-full border border-[#F5D08A] bg-[#FFF6E8] px-2.5 py-0.5 text-xs font-medium text-[#A65C06]">
                   Illustrative synthetic demo data — not real retailer records
                 </span>
               ) : (
-                <span className="rounded-md border border-slate-300 bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-800">
-                  User-uploaded CSV ({sourceFilename ?? "upload.csv"})
+                <span className="rounded-full border border-[#DEE6EB] bg-[#EFF4F6] px-2.5 py-0.5 text-xs font-medium text-[#102034]">
+                  Uploaded CSV ({sourceFilename ?? "upload.csv"})
                 </span>
               )}
             </div>
-            <p className="mt-1 text-xs text-slate-600">
-              Computes expected demand over supplier lead time (<code className="font-mono">1–14 days</code>), projected point-forecast shortage, and suggested reorder quantity via{" "}
-              <code className="font-mono">POST /backend/v1/recommendations</code> without retraining the forecast model.
+            <p className="mt-0.5 text-xs text-[#536579]">
+              Deterministic replenishment math over your supplier lead window (<code className="font-mono text-[#102034]">1–14 days</code>) via{" "}
+              <code className="font-mono text-[#102034]">POST /backend/v1/recommendations</code>—without retraining the forecast model.
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <label htmlFor="rec-sku-picker" className="text-xs font-semibold text-slate-700">
-              Select SKU:
+          <div className="flex flex-wrap items-center gap-2.5">
+            <label
+              htmlFor="rec-sku-picker"
+              className="text-xs font-semibold text-[#536579]"
+            >
+              Select product:
             </label>
             <select
               id="rec-sku-picker"
               value={activeProduct?.product_id ?? ""}
               onChange={(e) => setSelectedProductId(e.target.value)}
-              className="rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-900 focus:ring-2 focus:ring-slate-500 focus:outline-none"
+              className="rounded-xl border border-[#DEE6EB] bg-[#F6F8FA] px-3 py-2 text-xs sm:text-sm font-semibold text-[#102034] transition hover:bg-[#EFF4F6]"
             >
               {analysis.products.map((p) => (
                 <option key={p.product_id} value={p.product_id}>
-                  {p.product_id} — {p.product_name}
+                  {p.product_name} ({p.product_id})
                 </option>
               ))}
             </select>
@@ -364,16 +374,23 @@ export default function RecommendationsPage() {
         {activeProduct && activeProduct.forecast.length !== 14 ? (
           <div
             role="alert"
-            className="mt-6 rounded-lg border border-amber-300 bg-amber-50 p-5 text-xs text-amber-950"
+            className="mt-6 rounded-xl border border-[#F5D08A] bg-[#FFF6E8] p-5 text-xs text-[#A65C06]"
           >
             <div className="flex items-start gap-2.5">
-              <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden="true" />
+              <AlertTriangle
+                className="mt-0.5 h-5 w-5 shrink-0 text-[#A65C06]"
+                aria-hidden="true"
+              />
               <div>
-                <p className="font-bold text-sm">
-                  No Valid 14-Day Forecast Available for {activeProduct.product_id}
+                <p className="text-sm font-bold text-[#102034]">
+                  No valid 14-day forecast available for {activeProduct.product_id}
                 </p>
                 <p className="mt-1">
-                  Status: <code className="font-mono font-semibold">{activeProduct.status}</code>. Inventory recommendations require a 14-day forecast (at least 14 consecutive daily historical observations without date gaps).
+                  Status:{" "}
+                  <code className="font-mono font-semibold">
+                    {activeProduct.status}
+                  </code>
+                  . Inventory recommendations require a 14-day forecast (at least 14 consecutive daily historical observations without date gaps).
                 </p>
               </div>
             </div>
@@ -381,17 +398,22 @@ export default function RecommendationsPage() {
         ) : (
           activeProduct && (
             <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12">
-              {/* Left Column: Editable Inventory Inputs */}
+              {/* Left Column (5 cols): Inventory & Lead-Time Inputs */}
               <form
                 onSubmit={(e) => void handleFormSubmit(e)}
                 noValidate
-                className="space-y-4 rounded-xl border border-slate-200 bg-slate-50 p-5 lg:col-span-5"
+                className="space-y-4 rounded-xl border border-[#DEE6EB] bg-[#F6F8FA] p-5 lg:col-span-5"
               >
-                <div className="flex items-center justify-between">
-                  <h2 className="text-sm font-bold text-slate-900">
-                    Inventory &amp; Lead-Time Parameters
-                  </h2>
-                  <span className="rounded bg-slate-200 px-2 py-0.5 font-mono text-[11px] text-slate-800">
+                <div className="flex items-center justify-between border-b border-[#DEE6EB] pb-3">
+                  <div>
+                    <h2 className="text-sm font-bold text-[#102034]">
+                      Inventory &amp; lead-time inputs
+                    </h2>
+                    <p className="text-xs text-[#536579]">
+                      {activeProduct.product_name}
+                    </p>
+                  </div>
+                  <span className="rounded-md border border-[#DEE6EB] bg-white px-2 py-0.5 font-mono text-xs font-medium text-[#102034]">
                     {activeProduct.product_id}
                   </span>
                 </div>
@@ -399,11 +421,11 @@ export default function RecommendationsPage() {
                 <div>
                   <label
                     htmlFor="stock-on-hand-input"
-                    className="block text-xs font-semibold text-slate-800"
+                    className="block text-xs font-semibold text-[#102034]"
                   >
-                    Current Stock on Hand (units)
+                    Current stock on hand (units)
                   </label>
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-[#536579]">
                     Whole nonnegative integer (0 to 1,000,000)
                   </p>
                   <input
@@ -414,19 +436,19 @@ export default function RecommendationsPage() {
                     step={1}
                     value={stockInput}
                     onChange={(e) => setStockInput(e.target.value)}
-                    className="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 font-mono text-sm text-slate-900 focus:ring-2 focus:ring-slate-500 focus:outline-none"
+                    className="mt-1.5 block w-full rounded-xl border border-[#DEE6EB] bg-white px-3.5 py-2 font-mono text-sm font-semibold text-[#102034] shadow-2xs tabular-nums"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="lead-time-days-input"
-                    className="block text-xs font-semibold text-slate-800"
+                    className="block text-xs font-semibold text-[#102034]"
                   >
-                    Supplier Lead Time (days, 1–14)
+                    Supplier lead time (days, 1–14)
                   </label>
-                  <p className="text-[11px] text-slate-500">
-                    Sums the first L days of the 14-day forecast
+                  <p className="text-[11px] text-[#536579]">
+                    Sums the first L days of the 14-day forecast horizon
                   </p>
                   <input
                     id="lead-time-days-input"
@@ -436,18 +458,18 @@ export default function RecommendationsPage() {
                     step={1}
                     value={leadDaysInput}
                     onChange={(e) => setLeadDaysInput(e.target.value)}
-                    className="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 font-mono text-sm text-slate-900 focus:ring-2 focus:ring-slate-500 focus:outline-none"
+                    className="mt-1.5 block w-full rounded-xl border border-[#DEE6EB] bg-white px-3.5 py-2 font-mono text-sm font-semibold text-[#102034] shadow-2xs tabular-nums"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="safety-stock-input"
-                    className="block text-xs font-semibold text-slate-800"
+                    className="block text-xs font-semibold text-[#102034]"
                   >
-                    Safety Stock Buffer (units, default 0)
+                    Safety stock buffer (units, default 0)
                   </label>
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-[11px] text-[#536579]">
                     Optional buffer added above expected lead-time demand
                   </p>
                   <input
@@ -458,36 +480,36 @@ export default function RecommendationsPage() {
                     step={1}
                     value={safetyStockInput}
                     onChange={(e) => setSafetyStockInput(e.target.value)}
-                    className="mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 font-mono text-sm text-slate-900 focus:ring-2 focus:ring-slate-500 focus:outline-none"
+                    className="mt-1.5 block w-full rounded-xl border border-[#DEE6EB] bg-white px-3.5 py-2 font-mono text-sm font-semibold text-[#102034] shadow-2xs tabular-nums"
                   />
                 </div>
 
-                <div className="pt-2">
+                <div className="pt-1">
                   <button
                     type="submit"
                     disabled={isCalculating}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-xs transition hover:bg-slate-800 focus:ring-2 focus:ring-slate-500 focus:outline-none disabled:opacity-50"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#087F78] px-4 py-2.5 text-sm font-semibold text-white shadow-2xs transition hover:bg-[#0B746E] disabled:opacity-50 cursor-pointer"
                   >
                     {isCalculating ? (
                       <>
                         <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
-                        <span>Calculating via /backend/v1/recommendations...</span>
+                        <span>Calculating recommendation…</span>
                       </>
                     ) : (
                       <>
                         <Calculator className="h-4 w-4" aria-hidden="true" />
-                        <span>Calculate Reorder Recommendation</span>
+                        <span>Calculate recommendation</span>
                       </>
                     )}
                   </button>
                 </div>
 
-                {/* Quick scenario presets for demo walkthrough convenience */}
-                <div className="border-t border-slate-200 pt-3">
-                  <p className="text-[11px] font-semibold text-slate-600">
-                    Quick Scenario Presets (calls live API):
+                {/* Quick Scenario Presets */}
+                <div className="border-t border-[#DEE6EB] pt-3">
+                  <p className="text-[11px] font-semibold text-[#536579]">
+                    Quick scenario presets (calls live API):
                   </p>
-                  <div className="mt-1.5 flex flex-wrap gap-1.5">
+                  <div className="mt-2 flex flex-wrap gap-1.5">
                     <button
                       type="button"
                       disabled={isCalculating}
@@ -497,9 +519,9 @@ export default function RecommendationsPage() {
                         setSafetyStockInput("10");
                         void executeRecommendationCalculation("0", "7", "10");
                       }}
-                      className="rounded border border-slate-300 bg-white px-2 py-1 text-[11px] font-medium text-slate-700 hover:bg-slate-100"
+                      className="rounded-lg border border-[#DEE6EB] bg-white px-2.5 py-1 text-xs font-medium text-[#102034] transition hover:bg-[#EFF4F6] cursor-pointer"
                     >
-                      Low Stock (Stock=0, Lead=7d, Safety=10)
+                      Out of stock (0 on hand, 7d)
                     </button>
                     <button
                       type="button"
@@ -510,9 +532,9 @@ export default function RecommendationsPage() {
                         setSafetyStockInput("10");
                         void executeRecommendationCalculation("300", "7", "10");
                       }}
-                      className="rounded border border-slate-300 bg-white px-2 py-1 text-[11px] font-medium text-slate-700 hover:bg-slate-100"
+                      className="rounded-lg border border-[#DEE6EB] bg-white px-2.5 py-1 text-xs font-medium text-[#102034] transition hover:bg-[#EFF4F6] cursor-pointer"
                     >
-                      Well-Stocked (Stock=300, Lead=7d)
+                      Well-stocked (300 on hand, 7d)
                     </button>
                     <button
                       type="button"
@@ -523,15 +545,15 @@ export default function RecommendationsPage() {
                         setSafetyStockInput("5");
                         void executeRecommendationCalculation("25", "14", "5");
                       }}
-                      className="rounded border border-slate-300 bg-white px-2 py-1 text-[11px] font-medium text-slate-700 hover:bg-slate-100"
+                      className="rounded-lg border border-[#DEE6EB] bg-white px-2.5 py-1 text-xs font-medium text-[#102034] transition hover:bg-[#EFF4F6] cursor-pointer"
                     >
-                      14-Day Lead Time (Stock=25, Lead=14d)
+                      14-day lead (25 on hand, 14d)
                     </button>
                   </div>
                 </div>
               </form>
 
-              {/* Right Column: Calculated API Output & Formula Breakdown */}
+              {/* Right Column (7 cols): Decision-First Hero Card */}
               <div className="space-y-4 lg:col-span-7">
                 {calcError && (
                   <ErrorRetry
@@ -551,121 +573,187 @@ export default function RecommendationsPage() {
                 )}
 
                 {currentResult && appliedSettings && (
-                  <div className="space-y-4 rounded-xl border border-slate-200 bg-white p-5">
-                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-emerald-600" aria-hidden="true" />
-                        <h3 className="text-base font-bold text-slate-900">
-                          Calculated Replenishment Result ({currentResult.product_id})
-                        </h3>
+                  <div className="space-y-5 rounded-xl border border-[#DEE6EB] bg-white p-5 sm:p-6 shadow-2xs">
+                    {/* Top Bar: Risk Scenario Badge + Export CSV */}
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#DEE6EB] pb-4">
+                      <span
+                        className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold ${
+                          currentResult.risk_level === "high"
+                            ? "border-[#FECDCA] bg-[#FEF3F2] text-[#B42318]"
+                            : currentResult.risk_level === "medium"
+                            ? "border-[#F5D08A] bg-[#FFF6E8] text-[#A65C06]"
+                            : "border-[#D1FADF] bg-[#ECFDF3] text-[#027A48]"
+                        }`}
+                      >
+                        <span
+                          className={`h-2 w-2 rounded-full ${
+                            currentResult.risk_level === "high"
+                              ? "bg-[#B42318]"
+                              : currentResult.risk_level === "medium"
+                              ? "bg-[#A65C06]"
+                              : "bg-[#027A48]"
+                          }`}
+                          aria-hidden="true"
+                        />
+                        <span>
+                          Point-forecast risk scenario:{" "}
+                          <span className="uppercase">
+                            {currentResult.risk_level}
+                          </span>
+                        </span>
+                      </span>
+
+                      <button
+                        type="button"
+                        onClick={handleExportRecommendationsCsv}
+                        className="inline-flex items-center gap-1.5 rounded-xl border border-[#DEE6EB] bg-white px-3 py-1.5 text-xs font-semibold text-[#102034] transition hover:bg-[#EFF4F6] cursor-pointer"
+                      >
+                        <Download className="h-3.5 w-3.5 text-[#087F78]" aria-hidden="true" />
+                        <span>Export CSV</span>
+                      </button>
+                    </div>
+
+                    {/* Hero Decision Headline */}
+                    <div className="rounded-xl border border-[#087F78]/30 bg-[#E8F6F4]/70 p-5">
+                      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#087F78]">
+                        <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
+                        <span>Suggested replenishment order</span>
+                      </div>
+                      <div className="mt-1.5 text-3xl sm:text-4xl font-bold tracking-tight text-[#102034] tabular-nums">
+                        {currentResult.reorder_quantity_units > 0
+                          ? `Reorder ${formatInteger(
+                              currentResult.reorder_quantity_units
+                            )} units`
+                          : "No reorder needed (0 units)"}
+                      </div>
+                      <p className="mt-1 text-xs sm:text-sm text-[#536579]">
+                        For{" "}
+                        <strong className="font-semibold text-[#102034]">
+                          {activeProduct.product_name}
+                        </strong>{" "}
+                        (<code className="font-mono">{activeProduct.product_id}</code>) across a{" "}
+                        <strong className="font-semibold text-[#102034]">
+                          {appliedSettings.lead_time_days}-day
+                        </strong>{" "}
+                        supplier lead window
+                      </p>
+                    </div>
+
+                    {/* Supporting Triplet */}
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                      <div className="rounded-xl border border-[#DEE6EB] bg-[#F6F8FA] p-3.5">
+                        <div className="text-xs font-medium text-[#536579]">
+                          Expected {appliedSettings.lead_time_days}-day demand
+                        </div>
+                        <div className="mt-1 font-mono text-2xl font-bold text-[#102034] tabular-nums">
+                          {formatUnits(currentResult.expected_lead_time_demand, 2)}
+                          <span className="ml-1 font-sans text-xs font-normal text-[#536579]">
+                            units
+                          </span>
+                        </div>
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span
-                          className={`inline-flex items-center rounded-md border px-2.5 py-1 text-xs font-bold uppercase ${
-                            currentResult.risk_level === "high"
-                              ? "border-red-300 bg-red-100 text-red-950"
-                              : currentResult.risk_level === "medium"
-                              ? "border-amber-300 bg-amber-100 text-amber-950"
-                              : "border-emerald-300 bg-emerald-100 text-emerald-950"
+                      <div className="rounded-xl border border-[#DEE6EB] bg-[#F6F8FA] p-3.5">
+                        <div className="text-xs font-medium text-[#536579]">
+                          Current stock on hand
+                        </div>
+                        <div className="mt-1 font-mono text-2xl font-bold text-[#102034] tabular-nums">
+                          {formatInteger(appliedSettings.stock_on_hand)}
+                          <span className="ml-1 font-sans text-xs font-normal text-[#536579]">
+                            units
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="rounded-xl border border-[#DEE6EB] bg-[#F6F8FA] p-3.5">
+                        <div className="text-xs font-medium text-[#536579]">
+                          Projected shortage
+                        </div>
+                        <div
+                          className={`mt-1 font-mono text-2xl font-bold tabular-nums ${
+                            currentResult.projected_shortage_units > 0
+                              ? "text-[#B42318]"
+                              : "text-[#027A48]"
                           }`}
                         >
-                          Projected Risk Scenario: {currentResult.risk_level}
+                          {formatInteger(currentResult.projected_shortage_units)}
+                          <span className="ml-1 font-sans text-xs font-normal text-[#536579]">
+                            units
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Skimmable 1-Line Arithmetic Ribbon */}
+                    <div className="rounded-xl border border-[#DEE6EB] bg-[#F6F8FA] p-4">
+                      <div className="text-xs font-semibold text-[#102034]">
+                        Deterministic arithmetic breakdown (no LLM math)
+                      </div>
+                      <div className="mt-2 flex flex-wrap items-center gap-2 rounded-lg border border-[#DEE6EB] bg-white px-3.5 py-2.5 font-mono text-xs sm:text-sm text-[#102034] tabular-nums">
+                        <span>
+                          <strong>
+                            {formatUnits(currentResult.expected_lead_time_demand, 2)}
+                          </strong>{" "}
+                          expected demand
                         </span>
-                        <button
-                          type="button"
-                          onClick={handleExportRecommendationsCsv}
-                          className="inline-flex items-center gap-1 rounded-md border border-slate-300 bg-white px-2.5 py-1 text-xs font-medium text-slate-700 hover:bg-slate-50"
-                        >
-                          <Download className="h-3.5 w-3.5" aria-hidden="true" />
-                          <span>Export CSV</span>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-                      <div className="rounded-lg border border-slate-200 bg-slate-50 p-3.5">
-                        <div className="text-xs text-slate-500">
-                          Expected Lead-Time Demand ({appliedSettings.lead_time_days}d)
-                        </div>
-                        <div className="mt-1 font-mono text-2xl font-bold text-slate-900">
-                          {currentResult.expected_lead_time_demand}
-                          <span className="ml-1 text-xs font-normal text-slate-600">
-                            units
-                          </span>
-                        </div>
+                        <span className="text-[#536579]">+</span>
+                        <span>
+                          <strong>
+                            {formatInteger(appliedSettings.safety_stock_units)}
+                          </strong>{" "}
+                          safety stock
+                        </span>
+                        <span className="text-[#536579]">−</span>
+                        <span>
+                          <strong>
+                            {formatInteger(appliedSettings.stock_on_hand)}
+                          </strong>{" "}
+                          on hand
+                        </span>
+                        <span className="text-[#536579]">=</span>
+                        <span className="rounded bg-[#E8F6F4] px-2 py-0.5 font-bold text-[#087F78]">
+                          {formatInteger(currentResult.reorder_quantity_units)} suggested
+                          (ceil)
+                        </span>
                       </div>
 
-                      <div className="rounded-lg border border-slate-200 bg-slate-50 p-3.5">
-                        <div className="text-xs text-slate-500">
-                          Projected Shortage Scenario
-                        </div>
-                        <div className="mt-1 font-mono text-2xl font-bold text-slate-900">
-                          {currentResult.projected_shortage_units}
-                          <span className="ml-1 text-xs font-normal text-slate-600">
-                            units
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="rounded-lg border border-indigo-200 bg-indigo-50/70 p-3.5">
-                        <div className="text-xs font-semibold text-indigo-950">
-                          Suggested Reorder Quantity
-                        </div>
-                        <div className="mt-1 font-mono text-2xl font-bold text-indigo-950">
-                          {currentResult.reorder_quantity_units}
-                          <span className="ml-1 text-xs font-normal text-indigo-800">
-                            units
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Backend Explanation */}
-                    <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-xs text-slate-800">
-                      <p className="font-semibold text-slate-900">
-                        Backend Explanation:
-                      </p>
-                      <p className="mt-1 leading-relaxed">
+                      <p className="mt-2.5 text-xs leading-relaxed text-[#536579]">
+                        <strong className="font-semibold text-[#102034]">
+                          API explanation:
+                        </strong>{" "}
                         {currentResult.explanation}
                       </p>
-                    </div>
 
-                    {/* Deterministic Arithmetic Breakdown */}
-                    <div className="rounded-lg border border-slate-200 bg-white p-4 text-xs">
-                      <p className="font-semibold text-slate-900">
-                        Deterministic Formula Breakdown (No LLM Arithmetic):
-                      </p>
-                      <div className="mt-2 space-y-1 font-mono text-[11px] text-slate-700">
-                        <div>
-                          1. expected_lead_time_demand = sum(forecast[0 :{" "}
-                          {appliedSettings.lead_time_days}]) ={" "}
-                          <strong>{currentResult.expected_lead_time_demand}</strong>
-                        </div>
-                        <div>
-                          2. projected_shortage_units = max(0, ceil(
-                          {currentResult.expected_lead_time_demand} -{" "}
-                          {appliedSettings.stock_on_hand})) ={" "}
-                          <strong>{currentResult.projected_shortage_units}</strong>
-                        </div>
-                        <div>
-                          3. reorder_quantity_units = ceil(max(0,{" "}
-                          {currentResult.expected_lead_time_demand} +{" "}
-                          {appliedSettings.safety_stock_units} -{" "}
-                          {appliedSettings.stock_on_hand})) ={" "}
-                          <strong>{currentResult.reorder_quantity_units}</strong>
-                        </div>
+                      <div className="mt-2 font-mono text-[11px] text-[#536579]">
+                        Formula:{" "}
+                        <code>
+                          ceil(max(0, expected_lead_time_demand + safety_stock_units -
+                          stock_on_hand))
+                        </code>
                       </div>
                     </div>
 
-                    {/* Non-automatic ordering & Risk Disclosure */}
-                    <div className="rounded-lg border border-amber-200 bg-amber-50 p-3.5 text-xs text-amber-950">
+                    {/* Human-in-the-Loop Decision Notice */}
+                    <div className="rounded-xl border border-[#F5D08A] bg-[#FFF6E8] p-3.5 text-xs text-[#A65C06]">
                       <div className="flex items-start gap-2">
-                        <Info className="mt-0.5 h-4 w-4 shrink-0 text-amber-800" aria-hidden="true" />
-                        <p>
-                          <strong>Human-in-the-Loop Decision Notice:</strong>{" "}
-                          Projected shortage and risk level (<code className="font-mono">{currentResult.risk_level}</code>) indicate whether current stock covers the point-forecast demand over the {appliedSettings.lead_time_days}-day lead window. They are{" "}
-                          <strong>not a calibrated stockout probability</strong>. ReorderLens AI never places automatic supplier orders; review supplier pack sizes, budget, and physical inventory before ordering.
+                        <Info
+                          className="mt-0.5 h-4 w-4 shrink-0 text-[#A65C06]"
+                          aria-hidden="true"
+                        />
+                        <p className="leading-relaxed">
+                          <strong className="font-semibold text-[#102034]">
+                            Human-in-the-loop scenario notice:
+                          </strong>{" "}
+                          Projected shortage and risk level (
+                          <code className="font-mono font-semibold">
+                            {currentResult.risk_level}
+                          </code>
+                          ) indicate whether current stock covers point-forecast demand over the{" "}
+                          {appliedSettings.lead_time_days}-day lead window. They are{" "}
+                          <strong className="font-semibold text-[#102034]">
+                            not a calibrated stockout probability
+                          </strong>
+                          . ReorderLens AI never places automatic supplier orders.
                         </p>
                       </div>
                     </div>

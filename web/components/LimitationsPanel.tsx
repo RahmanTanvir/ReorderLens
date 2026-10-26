@@ -1,50 +1,90 @@
 import React from "react";
-import { ShieldAlert } from "lucide-react";
+import { ChevronDown, ShieldCheck } from "lucide-react";
 
 interface LimitationsPanelProps {
   compact?: boolean;
+  defaultOpen?: boolean;
 }
 
-export function LimitationsPanel({ compact = false }: LimitationsPanelProps) {
+export function LimitationsPanel({
+  compact = false,
+  defaultOpen = false,
+}: LimitationsPanelProps) {
+  if (compact) {
+    return (
+      <section
+        aria-label="Methodology and prototype boundaries"
+        className="rounded-xl border border-[#DEE6EB] bg-white px-4 py-3 text-xs text-[#536579]"
+      >
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <ShieldCheck
+              className="h-4 w-4 shrink-0 text-[#087F78]"
+              aria-hidden="true"
+            />
+            <span className="font-semibold text-[#102034]">
+              Methodology &amp; boundaries:
+            </span>
+            <span>
+              Point-forecast scenario only · Censored stockout history not inferred · Stateless session (no saved records or auto-orders).
+            </span>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section
-      aria-labelledby="limitations-panel-heading"
-      className="rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs text-slate-700"
+    <details
+      open={defaultOpen}
+      className="group rounded-xl border border-[#DEE6EB] bg-white text-xs text-[#536579] shadow-2xs"
     >
-      <div className="flex items-start gap-2.5">
-        <ShieldAlert
-          className="mt-0.5 h-4 w-4 shrink-0 text-slate-700"
+      <summary className="flex cursor-pointer items-center justify-between gap-3 rounded-xl px-4 py-3.5 font-medium text-[#102034] transition hover:bg-[#EFF4F6]/60">
+        <div className="flex flex-wrap items-center gap-2">
+          <ShieldCheck
+            className="h-4 w-4 shrink-0 text-[#087F78]"
+            aria-hidden="true"
+          />
+          <span className="text-sm font-semibold text-[#102034]">
+            Methodology, scientific boundaries &amp; privacy notes
+          </span>
+          <span className="rounded-full border border-[#DEE6EB] bg-[#F6F8FA] px-2 py-0.5 text-[11px] font-normal text-[#536579]">
+            Point forecast · Censored sales caveat · Stateless MVP
+          </span>
+        </div>
+        <ChevronDown
+          className="h-4 w-4 shrink-0 text-[#536579] transition-transform duration-150 group-open:rotate-180"
           aria-hidden="true"
         />
-        <div className="space-y-1.5">
-          <h2
-            id="limitations-panel-heading"
-            className="font-semibold text-slate-900"
-          >
-            Scientific, Operational &amp; Privacy Boundaries (Preliminary MVP)
-          </h2>
-          {compact ? (
-            <p className="leading-relaxed">
-              This is a preliminary single-user demonstration using illustrative synthetic sales data. Predictions and reorder quantities are model-based estimates, not guarantees. Sales history may understate demand when products were unavailable. The demo does not yet provide authentication, persistent cloud inventory records, validated field impact, or automated purchasing.
-            </p>
-          ) : (
-            <ul className="grid grid-cols-1 gap-1.5 pl-4 list-disc sm:grid-cols-2">
-              <li>
-                <strong>Point-Forecast Scenario Only:</strong> Projected shortages and risk levels reflect deterministic arithmetic on the 14-day point forecast, not calibrated stockout probabilities or confidence intervals.
-              </li>
-              <li>
-                <strong>Censored Historical Demand:</strong> Sales CSVs record completed transactions only; past stockouts or store closures can understate true customer demand.
-              </li>
-              <li>
-                <strong>Validation vs. Field Accuracy:</strong> The 14-day chronological MAE compares Ridge regression against the 7-day seasonal-naive baseline for model selection; it is not an independent test score or real-world ROI guarantee.
-              </li>
-              <li>
-                <strong>Human Review &amp; Stateless Session:</strong> No automatic supplier orders are placed, and no uploaded CSVs or inventory inputs are persisted to a database or browser storage.
-              </li>
-            </ul>
-          )}
-        </div>
+      </summary>
+      <div className="border-t border-[#DEE6EB] px-4 py-3.5">
+        <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+          <li className="rounded-lg bg-[#F6F8FA] p-2.5">
+            <strong className="font-semibold text-[#102034]">
+              Point-forecast scenario only:
+            </strong>{" "}
+            Projected shortages and risk levels reflect deterministic arithmetic on the 14-day point forecast, not calibrated stockout probabilities or prediction intervals.
+          </li>
+          <li className="rounded-lg bg-[#F6F8FA] p-2.5">
+            <strong className="font-semibold text-[#102034]">
+              Censored historical demand:
+            </strong>{" "}
+            Sales CSVs record completed transactions only; past stockouts or store closures can understate true customer demand.
+          </li>
+          <li className="rounded-lg bg-[#F6F8FA] p-2.5">
+            <strong className="font-semibold text-[#102034]">
+              Model-selection holdout MAE:
+            </strong>{" "}
+            The 14-day chronological holdout MAE compares Ridge regression against the 7-day seasonal-naive baseline for model selection; it is not an independent field test guarantee.
+          </li>
+          <li className="rounded-lg bg-[#F6F8FA] p-2.5">
+            <strong className="font-semibold text-[#102034]">
+              Human review &amp; stateless session:
+            </strong>{" "}
+            No automatic supplier orders are placed, and no uploaded CSVs or inventory inputs are persisted to a database or browser storage.
+          </li>
+        </ul>
       </div>
-    </section>
+    </details>
   );
 }

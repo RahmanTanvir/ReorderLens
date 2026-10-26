@@ -248,6 +248,56 @@ Known limitations and next gate:
   - Awaiting human go/no-go decision on public Vercel deployment vs. local prototype recording, followed by Milestone 07 (`prompts/07_FIX_AND_AUDIT.md`).
 ```
 
+### Entry 07 — Full ReorderLens AI Premium Redesign ("Inventory, in focus")
+
+```
+Date & time (Asia/Dhaka): 2026-10-27 01:17 +06:00
+Milestone / prompt: Full ReorderLens AI Premium Redesign (design-redesign/03_ANTIGRAVITY_IMPLEMENT_FULL_REDESIGN.md)
+Human reviewer: Pending owner review of redesigned UI on http://localhost:3000
+AI coding tool actually used: Google Antigravity
+Commit / changed files:
+  - Reversible Git baseline checkpoint commit created: 099adcc ("checkpoint: working M1-M6 baseline before premium UI redesign")
+  - web/app/globals.css (Updated — semantic design tokens: #F6F8FA canvas, #FFFFFF surface, #EFF4F6 subtle raised, #102034 strong ink, #536579 muted ink, #DEE6EB border, #087F78 primary teal accent, #2C4B66 chart history, #087F78 chart prediction, tabular-nums, focus-visible ring, prefers-reduced-motion)
+  - web/lib/format.ts (Created — Intl.NumberFormat helpers formatUnits, formatInteger, formatMae, formatShortDate eliminating raw float tails such as 89.29999999999998 and 208.89000000000001)
+  - web/components/HealthBadge.tsx (Updated — compact interactive API status pill "API connected" / "API unavailable" with expandable proxy details and retry button, replacing the full-width System Connectivity banner)
+  - web/components/Navbar.tsx (Updated — unified "Inventory, in focus" top shell with teal lens mark, DemandIQ prototype tag, 5 navigation tabs, compact trust status pill, synthetic demo disclosure pill, and HealthBadge)
+  - web/app/layout.tsx (Updated — 1280px max-width container, skip link, clean editorial footer)
+  - web/components/ErrorRetry.tsx (Updated — semantic danger tokens #B42318 / #FEF3F2 and accessible retry action)
+  - web/components/LimitationsPanel.tsx (Updated — progressive-disclosure <details> component preserving 100% of scientific, demand-censoring, and privacy caveats without crowding the first fold)
+  - web/components/ForecastChart.tsx (Updated — #2C4B66 observed history line, #087F78 dashed 14-day forecast line, vertical ReferenceLine at forecast start date, formatted tooltips, horizontal-only gridlines)
+  - web/app/page.tsx (Updated — Overview empty-state hero "Smarter reordering starts with your sales history." + 3-step workflow rail + 3 trust micro-cards; loaded-state "Ready to review inventory." + 4 compact metric tiles + formatted SKU decision table + collapsible ingestion details)
+  - web/app/import/page.tsx (Updated — 3-step progress indicator "1 Add sales -> 2 Check data -> 3 View forecast", drag-and-drop + browse CSV upload card, secondary "Try the sample dataset" card, collapsible CSV rules, crisp validation callout, and formatted SKU preview table)
+  - web/app/forecast/page.tsx (Updated — above-the-fold header, SKU selector, compact 4-tile hero metric strip, and Recharts forecast chart immediately in the first fold; side-by-side Ridge vs. Seasonal-naive holdout MAE comparison and selection rationale below the chart; accessible collapsible forecast/history tables)
+  - web/app/recommendations/page.tsx (Updated — "Turn forecasts into stock decisions" 5/7 split layout with editable stock/lead/safety inputs + quick scenario presets on the left, and decision-first hero card "Reorder 145 units" + supporting triplet + 1-line deterministic arithmetic ribbon + Export CSV on the right)
+  - web/app/docs/page.tsx (Updated — editorial reference layout with 4 in-page anchor tabs, 5-step HTML/CSS visual pipeline diagram, verified 3-SKU evaluation table, and provenance/architecture disclosures)
+  - docs/DEVELOPMENT_LOG.md (Updated)
+Working behavior observed:
+  - Eliminated all floating-point presentation artifacts (e.g., 89.3 units and 208.9 units instead of 89.29999999999998 and 208.89000000000001).
+  - Replaced stacked top banners with a unified header shell while keeping "Prototype — no saved data" and "Illustrative synthetic demo data — not real retailer records" visibly present.
+  - Forecast chart now sits directly below the compact metric strip above the fold on desktop viewports.
+  - Recommendations screen now highlights the actionable reorder quantity ("Reorder 145 units" for rice-1kg at stock=25, lead=7, safety=0) with a 1-line deterministic formula ribbon.
+Exact commands executed:
+  - git add . ; git commit -m "checkpoint: working M1-M6 baseline before premium UI redesign"
+  - cd web && npm run lint && npx tsc --noEmit && npm run build
+  - cd backend && .\.venv\Scripts\python.exe -m pytest -q
+  - cd web && npm run start -- --port 3000
+  - Automated E2E verification script against http://localhost:3000 testing /, /import, /forecast, /recommendations, /docs, /backend/health, /backend/v1/analyze, and /backend/v1/recommendations
+Pass/fail output summary:
+  - npm run lint: PASS (0 warnings, 0 errors)
+  - npx tsc --noEmit: PASS (0 errors)
+  - npm run build: PASS (all 5 routes compiled cleanly; First Load JS 116–221 kB)
+  - pytest: PASS (22 passed, 1 warning in 20.48s)
+  - E2E localhost route & API verification: PASS
+Manual checks:
+  - Automated HTTP & DOM content verification completed across all 5 routes; headless browser screenshot capture across the 5 target viewports is not installed in this environment, so live visual inspection is ready for the owner at http://localhost:3000.
+Deployment URLs actually verified (if any):
+  - Localhost production server running at http://localhost:3000 proxying to http://127.0.0.1:8000.
+Security/provenance review:
+  - All backend contracts, ML model selection logic, deterministic inventory formulas, and synthetic data disclosures remain 100% intact.
+Known limitations and next gate:
+  - Ready for owner visual walkthrough at http://localhost:3000 and demo video recording per design-redesign/05_VIDEO_PATH.md.
+```
+
 ### Template
 
 ```

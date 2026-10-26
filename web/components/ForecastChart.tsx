@@ -6,12 +6,14 @@ import {
   Legend,
   Line,
   LineChart,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
 import { DailyPoint } from "@/lib/api";
+import { formatShortDate, formatUnits } from "@/lib/format";
 
 interface ForecastChartProps {
   productId: string;
@@ -24,6 +26,7 @@ interface ForecastChartProps {
 
 interface ChartDatum {
   date: string;
+  shortDate: string;
   historicalUnits: number | null;
   forecastUnits: number | null;
 }
@@ -36,18 +39,16 @@ export function ForecastChart({
   chosenMethod,
   isSyntheticDemo,
 }: ForecastChartProps) {
-  // Show up to the most recent 60 historical days on the chart so the 14-day horizon is visually clear,
-  // while bridging the last historical point to the first forecast point for visual continuity.
   const chartData = useMemo<ChartDatum[]>(() => {
     const recentHistory = history.slice(-60);
     const points: ChartDatum[] = recentHistory.map((pt) => ({
       date: pt.date,
+      shortDate: formatShortDate(pt.date),
       historicalUnits: pt.units,
       forecastUnits: null,
     }));
 
     if (recentHistory.length > 0 && forecast.length > 0) {
-      // Connect the transition at the last observed date so the forecast line starts smoothly from the cutoff
       points[points.length - 1] = {
         ...points[points.length - 1],
         forecastUnits: recentHistory[recentHistory.length - 1].units,
@@ -57,78 +58,123 @@ export function ForecastChart({
     for (const fpt of forecast) {
       points.push({
         date: fpt.date,
+        shortDate: formatShortDate(fpt.date),
         historicalUnits: null,
-        forecastUnits: fpt.units,
+        forecastUnits: Number(fpt.units.toFixed(2)),
       });
     }
 
     return points;
   }, [history, forecast]);
 
+  const cutoffDate = history[history.length - 1]?.date;
+
   const methodLabel =
     chosenMethod === "ridge"
-      ? "14-Day Forecast (Ridge Regression)"
-      : "14-Day Forecast (Seasonal-Naive Baseline)";
+      ? "14-day forecast (Ridge regression)"
+      : "14-day forecast (Seasonal-naive baseline)";
 
   return (
     <figure
       aria-label={`Demand history and 14-day forecast chart for ${productName} (${productId})`}
-      className="rounded-xl border border-slate-200 bg-white p-4"
+      className="rounded-xl border border-[#DEE6EB] bg-white p-4 sm:p-5 shadow-2xs"
     >
-      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+      <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h3 className="text-sm font-bold text-slate-900">
-            Historical Daily Sales (Recent 60 Days) vs. 14-Day Point Forecast —{" "}
-            <span className="font-mono">{productId}</span>
-          </h3>
-          <p className="text-xs text-slate-600">
-            Y-axis: Daily units sold / predicted • X-axis: ISO Calendar Date (YYYY-MM-DD)
+          <div className="flex flex-wrap items-center gap-2">
+            <h2 className="text-base font-semibold text-[#102034]">
+              Daily unit demand: recent 60 days &amp; next 14-day forecast
+            </h2>
+            <span className="rounded-md bg-[#EFF4F6] px-2 py-0.5 font-mono text-xs font-medium text-[#536579]">
+              {productId}
+            </span>
+          </div>
+          <p className="mt-0.5 text-xs text-[#536579]">
+            Solid slate line shows observed daily unit sales · Dashed teal line shows the recursive 14-day point forecast
           </p>
         </div>
+
         {isSyntheticDemo && (
-          <span className="rounded border border-amber-300 bg-amber-100 px-2 py-0.5 text-[11px] font-semibold text-amber-950">
+          <span className="rounded-full border border-[#F5D08A] bg-[#FFF6E8] px-2.5 py-1 text-[11px] font-medium text-[#A65C06]">
             Illustrative synthetic demo data — not real retailer records
           </span>
         )}
       </div>
 
-      <div className="h-80 w-full">
+      <div className="h-76 sm:h-84 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={chartData}
-            margin={{ top: 10, right: 20, left: 10, bottom: 10 }}
+            margin={{ top: 12, right: 20, left: 4, bottom: 8 }}
           >
-            <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              vertical={false}
+              stroke="#DEE6EB"
+            />
             <XAxis
               dataKey="date"
-              tick={{ fontSize: 11, fill: "#475569" }}
-              minTickGap={24}
+              tickFormatter={(val: string) => formatShortDate(val)}
+              tick={{ fontSize: 11, fill: "#536579" }}
+              axisLine={{ stroke: "#DEE6EB" }}
+              tickLine={{ stroke: "#DEE6EB" }}
+              minTickGap={28}
             />
             <YAxis
-              tick={{ fontSize: 11, fill: "#475569" }}
+              tick={{ fontSize: 11, fill: "#536579" }}
+              axisLine={false}
+              tickLine={false}
               allowDecimals={false}
+              width={42}
               label={{
-                value: "Units",
+                value: "Units / day",
                 angle: -90,
                 position: "insideLeft",
-                style: { fontSize: 11, fill: "#475569" },
+                style: { fontSize: 11, fill: "#536579" },
               }}
             />
+            {cutoffDate && (
+              <ReferenceLine
+                x={cutoffDate}
+                stroke="#8095A8"
+                strokeDasharray="4 4"
+                label={{
+                  value: "Forecast start",
+                  position: "insideTopRight",
+                  fill: "#536579",
+                  fontSize: 11,
+                }}
+              />
+            )}
             <Tooltip
+              formatter={(value, name) => [
+                `${formatUnits(Number(value), 2)} units`,
+                String(name),
+              ]}
+              labelFormatter={(label) => `Date: ${String(label)}`}
               contentStyle={{
                 fontSize: "12px",
-                borderRadius: "8px",
-                borderColor: "#cbd5e1",
+                borderRadius: "10px",
+                borderColor: "#DEE6EB",
+                backgroundColor: "#FFFFFF",
+                color: "#102034",
+                boxShadow: "0 4px 12px rgba(16, 32, 52, 0.08)",
               }}
             />
-            <Legend wrapperStyle={{ fontSize: "12px", paddingTop: "8px" }} />
+            <Legend
+              wrapperStyle={{
+                fontSize: "12px",
+                paddingTop: "10px",
+                color: "#102034",
+              }}
+            />
             <Line
               type="monotone"
               dataKey="historicalUnits"
-              name="Observed Historical Sales (Units)"
-              stroke="#0f172a"
+              name="Observed daily sales"
+              stroke="#2C4B66"
               strokeWidth={2}
-              dot={{ r: 2 }}
+              dot={{ r: 2, fill: "#2C4B66" }}
               activeDot={{ r: 4 }}
               connectNulls={false}
               isAnimationActive={false}
@@ -137,10 +183,10 @@ export function ForecastChart({
               type="monotone"
               dataKey="forecastUnits"
               name={methodLabel}
-              stroke="#4f46e5"
+              stroke="#087F78"
               strokeWidth={2.5}
-              strokeDasharray="5 4"
-              dot={{ r: 3 }}
+              strokeDasharray="6 4"
+              dot={{ r: 3, fill: "#087F78" }}
               activeDot={{ r: 5 }}
               connectNulls={false}
               isAnimationActive={false}
@@ -148,12 +194,26 @@ export function ForecastChart({
           </LineChart>
         </ResponsiveContainer>
       </div>
-      <figcaption className="mt-2 text-[11px] text-slate-500">
-        Solid dark line shows observed daily unit sales up to{" "}
-        <code className="font-mono">{history[history.length - 1]?.date ?? "—"}</code>.
-        Dashed indigo line shows the 14-day recursive point forecast (
-        <code className="font-mono">{forecast[0]?.date ?? "—"}</code> to{" "}
-        <code className="font-mono">{forecast[forecast.length - 1]?.date ?? "—"}</code>).
+
+      <figcaption className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-[#DEE6EB] pt-2.5 text-xs text-[#536579]">
+        <span>
+          Observed history ends{" "}
+          <code className="font-mono font-medium text-[#102034]">
+            {cutoffDate ?? "—"}
+          </code>{" "}
+          · 14-day forecast covers{" "}
+          <code className="font-mono font-medium text-[#102034]">
+            {forecast[0]?.date ?? "—"}
+          </code>{" "}
+          to{" "}
+          <code className="font-mono font-medium text-[#102034]">
+            {forecast[forecast.length - 1]?.date ?? "—"}
+          </code>
+          .
+        </span>
+        <span className="text-[11px]">
+          Point-forecast series (tabular fallback available below)
+        </span>
       </figcaption>
     </figure>
   );
