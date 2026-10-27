@@ -298,6 +298,40 @@ Known limitations and next gate:
   - Ready for owner visual walkthrough at http://localhost:3000 and demo video recording per design-redesign/05_VIDEO_PATH.md.
 ```
 
+### Entry 08 — Vercel Multi-Service Configuration (`vercel.json` + Runtime Service Bindings)
+
+```
+Date & time (Asia/Dhaka): 2026-10-27 19:01 +06:00
+Milestone / prompt: Configure repository for Vercel Services (services + bindings + runtime route handler)
+Human reviewer: Pending owner confirmation of service names, public/internal routing, and bindings
+AI coding tool actually used: Google Antigravity
+Commit / changed files:
+  - vercel.json (Created — defines `backend` and `web` services, `BACKEND_URL` service binding on `web` targeting `backend`, and public rewrite `/(.*)` -> `web`)
+  - web/app/backend/[...path]/route.ts (Created — runtime App Router Route Handler proxying `/backend/:path*` to `new URL(relativePath, process.env.BACKEND_URL)` at request time inside a serverless function)
+  - web/next.config.ts (Updated — removed build-time `rewrites()` and build-time `BACKEND_URL` throw since Vercel service bindings resolve only at runtime in functions, not during `next build`)
+  - backend/app.py (Updated — mounted routes on `APIRouter` at both `/` and `/backend` so `backend` works whether called internally via `BACKEND_URL` or routed publicly under `/backend/(.*)`)
+  - web/.env.example & examples/web.env.example (Updated — documented that `BACKEND_URL` is injected automatically by Vercel Services bindings; removed local `web/.env.local` override)
+  - docs/DEVELOPMENT_LOG.md (Updated)
+Working behavior observed:
+  - `next build` succeeds cleanly without `BACKEND_URL` set at build time, compiling `/backend/[...path]` as a dynamic (`ƒ`) runtime function.
+  - `pytest` passes all 22 backend tests.
+Exact commands executed:
+  - cd backend && .\.venv\Scripts\python.exe -m pytest -q
+  - cd web && Remove-Item Env:BACKEND_URL -ErrorAction SilentlyContinue; npm run lint ; npx tsc --noEmit ; npm run build
+Pass/fail output summary:
+  - pytest: 22 passed, 1 warning
+  - npm run lint / npx tsc --noEmit / npm run build: PASS (0 errors)
+Manual checks:
+  - Owner confirmed keeping `backend` internal behind `web` (only `/(.*)` -> `web` in top-level `rewrites`, with `web` calling `backend` via the `BACKEND_URL` service binding).
+  - Verified live E2E runtime route handler (`web/app/backend/[...path]/route.ts`) proxying `/backend/health`, `/backend/v1/analyze`, and `/backend/v1/recommendations` to `BACKEND_URL` (`http://127.0.0.1:8000`).
+Deployment URLs actually verified (if any):
+  - Localhost servers running and verified (`http://localhost:3000` -> `BACKEND_URL=http://127.0.0.1:8000`); ready for `vercel dev` and Vercel Services deployment.
+Security/provenance review:
+  - `BACKEND_URL` is not hardcoded in `.env` files; injected at runtime by Vercel service binding. `backend` remains internal and receives no direct public traffic.
+Known limitations and next gate:
+  - Vercel multi-service configuration finalized and confirmed.
+```
+
 ### Template
 
 ```

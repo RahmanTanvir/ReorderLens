@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, Request, UploadFile
+from fastapi import APIRouter, FastAPI, File, Request, UploadFile
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
@@ -18,6 +18,8 @@ app = FastAPI(
     version="mvp-1",
     description="Stateless demand forecasting and deterministic inventory recommendation API for ReorderLens AI.",
 )
+
+router = APIRouter()
 
 
 @app.exception_handler(ApiError)
@@ -63,7 +65,7 @@ async def handle_unexpected_error(_request: Request, _exc: Exception) -> JSONRes
     return JSONResponse(status_code=500, content=payload.model_dump())
 
 
-@app.get("/health", response_model=HealthResponse)
+@router.get("/health", response_model=HealthResponse)
 def get_health() -> HealthResponse:
     return HealthResponse(
         status="ok",
@@ -72,7 +74,7 @@ def get_health() -> HealthResponse:
     )
 
 
-@app.post("/v1/analyze", response_model=AnalyzeResponse)
+@router.post("/v1/analyze", response_model=AnalyzeResponse)
 async def post_analyze(file: UploadFile = File(...)) -> AnalyzeResponse:
     # Read in bounded chunks up to MAX_FILE_BYTES + 1 to decline oversized uploads safely in memory
     chunks: list[bytes] = []
@@ -97,7 +99,7 @@ async def post_analyze(file: UploadFile = File(...)) -> AnalyzeResponse:
     return analyze_csv_bytes(raw_bytes)
 
 
-@app.post("/v1/recommendations", response_model=RecommendationResponse)
+@router.post("/v1/recommendations", response_model=RecommendationResponse)
 async def post_recommendations(request: Request) -> RecommendationResponse:
     try:
         payload = await request.json()
@@ -110,3 +112,8 @@ async def post_recommendations(request: Request) -> RecommendationResponse:
         ) from exc
 
     return compute_recommendations_from_payload(payload)
+
+
+# Mount routes for internal BACKEND_URL service binding calls from `web`
+app.include_router(router)
+
