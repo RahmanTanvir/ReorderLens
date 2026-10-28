@@ -332,6 +332,32 @@ Known limitations and next gate:
   - Vercel multi-service configuration finalized and confirmed.
 ```
 
+### Entry 09 — Root `README.md` Update
+
+```
+Date & time (Asia/Dhaka): 2026-10-28 22:23 +06:00
+Milestone / prompt: Replace root README.md with user-provided competition submission README
+Human reviewer: Owner requested direct replacement
+AI coding tool actually used: Google Antigravity
+Commit / changed files:
+  - README.md (Updated with exact user-provided Markdown)
+  - docs/DEVELOPMENT_LOG.md (Updated)
+Working behavior observed:
+  - Root README.md updated cleanly. Note: `web/public/demo-sales.csv` currently has 3 synthetic products × 120 days (360 rows), while the updated README mentions five example products; let us know if you would like `generate_demo_csv.py` and the UI labels updated to 5 products or if the README text should say three products.
+Exact commands executed:
+  - None required (documentation-only update)
+Pass/fail output summary:
+  - N/A
+Manual checks:
+  - Verified exact Markdown content in README.md.
+Deployment URLs actually verified (if any):
+  - Local servers remain running at http://localhost:3000 and http://127.0.0.1:8000.
+Security/provenance review:
+  - Preserves honest concept/demo status and synthetic data disclosures.
+Known limitations and next gate:
+  - Ready for git commit/push if desired.
+```
+
 ### Template
 
 ```

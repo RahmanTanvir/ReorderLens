@@ -1,55 +1,94 @@
-# ReorderLens AI — Antigravity rapid MVP implementation kit
+# ReorderLens AI
 
-**Challenge:** DemandIQ — CommerceSphere AI, International AI Builders Congress 2026  
-**Team:** The White Hole, four human members (owner-provided)  
-**Product:** ReorderLens AI  
-**Prepared:** 26 October 2026 (Asia/Dhaka)  
-**Objective:** functional preliminary prototype + truthful three-minute concept/demo video  
-**Internal submission target:** 27 October 2026 (owner-provided); organizer-published preliminary date in earlier sources: 31 October 2026, exact portal cutoff not reverified  
-**Status:** this kit is *approved implementation instructions and planning documentation*. It is **not** an implemented, tested, or deployed application.
+**Smarter restocking decisions, starting with the sales data a shop already has.**
 
-## Open this first
+**International AI Builders Congress 2026** · **DemandIQ Challenge** · **CommerceSphere AI**  
+**Team:** The White Hole (4 members) · **Track:** Idea to Unicorn — Team-Built Product
 
-1. Unzip this package into a **new or existing ReorderLens AI Git repository**. Do **not** replace existing source files without reviewing differences. The files in this package describe and prompt implementation; they do not themselves constitute working app code.
-2. Open that folder as your Antigravity **Project/workspace**. Keep root `AGENTS.md` where it is: Antigravity recognizes root `AGENTS.md` or `GEMINI.md` as workspace rules according to its [Rules documentation](https://antigravity.google/docs/rules/). We deliberately provide **one** root rules file to avoid conflicts.
-3. Open [`prompts/00_START_HERE.md`](prompts/00_START_HERE.md). Paste **its first prompt** into Antigravity. Start at milestone 01. Do not paste every phase prompt together.
-4. After each milestone: inspect diffs, run the stated checks, complete manual checks, commit a known-good checkpoint, and update [`docs/DEVELOPMENT_LOG.md`](docs/DEVELOPMENT_LOG.md).
-5. Deploy **backend Vercel project first**; then set the frontend backend-origin variable and deploy **frontend Vercel project**. This is intentionally **two Vercel projects linked to one Git repository**, not an unverified single-project multi-runtime configuration.
-6. Record the video **only after** seeing the real end-to-end flow run; use [`docs/09_DEMO_AND_SUBMISSION.md`](docs/09_DEMO_AND_SUBMISSION.md).
+> **Project status — concept and demonstration website**  
+> ReorderLens AI is currently an idea supported by a website demo that explains the intended experience. **The full product has not yet been developed or validated.** Our team has been balancing midterm examinations and will begin full development after the exams. The demo uses **synthetic sales data**; its examples are not evidence of real retailer results, proven forecast accuracy, or a production-ready service.
 
-## Document map (source of truth)
+## The problem
 
-| Path | Authority / purpose |
-|---|---|
-| [`AGENTS.md`](AGENTS.md) | Binding developer/Antigravity code-editing rules for this approved rapid MVP. |
-| [`docs/01_PRODUCT_AND_COMPETITION.md`](docs/01_PRODUCT_AND_COMPETITION.md) | Challenge alignment, authentic value proposition, label of approved/unknown. |
-| [`docs/02_SCOPE_AND_UX.md`](docs/02_SCOPE_AND_UX.md) | P0 product behavior, four screens, accessibility and state coverage. |
-| [`docs/03_ARCHITECTURE_AND_DEPLOYMENT.md`](docs/03_ARCHITECTURE_AND_DEPLOYMENT.md) | Approved MVP technical design, Vercel split deployments and proxy routing. |
-| [`docs/04_DATA_AND_AI.md`](docs/04_DATA_AND_AI.md) | CSV conventions, leakage-safe forecasting, selection metrics and inventory formula. |
-| [`docs/05_API_CONTRACTS.md`](docs/05_API_CONTRACTS.md) | Authoritative HTTP contracts and typed JSON shapes. |
-| [`docs/06_TESTING_AND_ACCEPTANCE.md`](docs/06_TESTING_AND_ACCEPTANCE.md) | Non-negotiable automated/manual test matrix and release criteria. |
-| [`docs/07_ROADMAP_AND_DECISIONS.md`](docs/07_ROADMAP_AND_DECISIONS.md) | Milestones, approvals, fallback boundaries, decision log. |
-| [`docs/08_SECURITY_AND_PROVENANCE.md`](docs/08_SECURITY_AND_PROVENANCE.md) | Demo data labeling, privacy, secure uploads and AI disclosures. |
-| [`docs/09_DEMO_AND_SUBMISSION.md`](docs/09_DEMO_AND_SUBMISSION.md) | Three-minute video, one-page outline, honesty/evidence checklist. |
-| [`docs/10_EVIDENCE_SOURCES.md`](docs/10_EVIDENCE_SOURCES.md) | Official/reference links and unresolved judging/submission claims. |
-| [`docs/DEVELOPMENT_LOG.md`](docs/DEVELOPMENT_LOG.md) | Real progress and test evidence; initially empty by design. |
-| [`prompts/00_START_HERE.md`](prompts/00_START_HERE.md) | Operating procedure and first Antigravity prompt. |
-| [`prompts/01_FOUNDATION.md`](prompts/01_FOUNDATION.md) ... [`prompts/08_RELEASE_VIDEO.md`](prompts/08_RELEASE_VIDEO.md) | Self-contained, sequential agent prompts; review each before moving on. |
-| [`reference/`](reference/) | Prior handover/master instructions and submission drafts; **historical context**, superseded by approved emergency MVP where conflicting. |
-| [`examples/`](examples/) | Illustrative sample CSV header and environment variable examples; not real training data or credentials. |
+A customer comes to a small shop looking for a popular product, but it is out of stock. The shop misses a sale. Meanwhile, other products may sit unsold, tying up money that the owner needs for the business.
 
-## Explicitly approved in this conversation
+For many small retailers, deciding **what to reorder, how much to buy, and when to buy it** is difficult. Sales history may exist in spreadsheets or basic records, but turning that information into useful inventory decisions takes time and expertise.
 
-- Official challenge **DemandIQ**; product name **ReorderLens AI**; team **The White Hole** with **four members**.
-- Four-screen rapid MVP: overview, CSV import, demand forecasting, inventory recommendations; genuine computation and interpretable results.
-- Next.js/TypeScript + Tailwind/shadcn/ui/Recharts; Python/FastAPI/Pandas/scikit-learn; Vercel host; small scoped datasets; stateless preliminary proof of concept; optional `/docs` if achievable.
-- Human-reviewed purchasing advice, meaningful baseline comparison, accurate synthetic-demo labeling; **no false deployed/pilot/accuracy claims**.
-- **Implementation plan approved** on 26 October 2026; user expressly authorized creating Antigravity docs and prompts.
+## Our idea
 
-## Crucial reality check
+**ReorderLens AI** aims to make demand forecasting and inventory planning more accessible to small retailers, starting with businesses in Bangladesh.
 
-No application repository/code, model, integration, automated tests, or Vercel deployment was provided for inspection **when this kit was authored**. Antigravity must inspect the user's actual workspace first. Do not mark tasks done because they are described here. The final saved competition-form answers, authenticated account deadline and exact binding rubric are **not verified**.
+Instead of asking an owner to interpret complex reports, the proposed system would connect sales patterns to a practical question:
 
-## Minimal successful demo
+> **Based on expected demand, current stock, and delivery time, how much should I reorder?**
 
-**Load clearly labeled sample CSV → inspect accepted records → choose an SKU → display a genuine 14-day forecast + baseline validation → edit current stock and lead time → show recomputed shortage/reorder quantity and explanation.** The live deployment must survive refreshing and returning to a graceful empty/demo-start state; unpersisted data **must not be represented as stored**.
+The goal is to help retailers reduce avoidable stock shortages and unnecessary overstocking, while keeping the final purchasing decision in their hands. These benefits are **intended outcomes**, not results we have measured.
+
+## How ReorderLens AI is intended to work
+
+1. **Import sales history.** A retailer provides product-level sales records in a simple CSV format.
+2. **Prepare the data.** The system checks dates, product identifiers, quantities, and missing information.
+3. **Estimate future demand.** Forecasting methods analyze historical patterns to estimate demand for the next 14 days.
+4. **Consider the current inventory.** The retailer enters available stock, supplier lead time, and an optional safety-stock buffer.
+5. **Review a reorder suggestion.** The system translates forecast demand into an estimated replenishment quantity with a clear explanation. The retailer decides whether to act.
+
+**Proposed flow:** Sales history → Data checks → Demand estimate → Inventory calculation → Human-reviewed reorder decision
+
+## What the concept demo shows
+
+The website is a **visual and interactive explanation of our proposed product**, not the completed inventory platform. Its screens illustrate the following journey:
+
+| Demo section | What it illustrates |
+| --- | --- |
+| **Overview** | A simple place to review products, sales history, and demand estimates. |
+| **Import Sales** | How a retailer could upload a CSV and review a sample dataset. |
+| **Demand Forecast** | How past sales and a 14-day estimate could be shown together, with a comparison of forecasting approaches. |
+| **Recommendations** | How current stock and supplier lead time could lead to an understandable suggested reorder quantity. |
+| **Docs & Provenance** | The proposed workflow, forecasting approach, assumptions, and limitations. |
+
+The supplied demonstration data contains **five example products with 120 days of synthetic sales history each**. Any charts, forecast values, or reorder quantities shown are **illustrative scenarios** and should not be interpreted as independently validated predictions.
+
+## What we want to do differently
+
+- **Make forecasts actionable.** A predicted sales number is useful only when it helps answer a real inventory question.
+- **Keep the reasoning visible.** Owners should be able to see how stock, expected demand, and supplier lead time affect a recommendation.
+- **Use an appropriate forecasting method.** We intend to compare machine-learning forecasts with simpler baselines instead of assuming the more complex model is always better.
+- **Keep people in control.** The product is intended to support purchasing decisions, not automatically place supplier orders.
+- **Make the experience approachable.** CSV-based input and plain-language explanations can reduce the need for specialist software knowledge.
+
+These are **product goals**, not completed or tested capabilities.
+
+## Intended users
+
+Our initial focus is **small and medium-sized retailers**, particularly shops that manage many products but have limited access to dedicated forecasting or inventory-planning tools. The concept may also be relevant to independent store managers and small retail teams.
+
+## Data, AI, and responsible use
+
+The planned forecasting approach will explore time-series features and compare candidates such as **Ridge regression** with a **weekly seasonal-naive baseline**. Replenishment quantities would be calculated from forecast demand and inventory inputs using transparent rules.
+
+We intend to use permitted data, validate CSV inputs, explain uncertainty, and protect any retailer information we later collect. Historical sales can understate actual demand when a product was out of stock, so sales forecasts must not be treated as guarantees. We will not claim reduced stockouts, increased revenue, or forecasting accuracy until these outcomes have been evaluated with appropriate evidence.
+
+**Current evidence boundary:** The website and synthetic examples explain the concept. They do **not** establish customer adoption, real-world model performance, or commercial impact.
+
+## Development roadmap
+
+**After our midterm exams**, we intend to work through these stages:
+
+1. **Build the core product:** Reliable CSV import, validation, forecasting, and explainable reorder calculations.
+2. **Test the approach:** Compare forecasting methods against simple baselines using time-ordered evaluation and check the inventory calculations with test cases.
+3. **Improve the product experience:** Refine the dashboard, error handling, accessibility, and documentation based on testing.
+4. **Validate with retailers:** Seek feedback from real shop owners, understand their workflows, and test whether recommendations are useful in practice.
+5. **Prepare for wider use:** Assess secure data storage, account access, deployment, and operating costs before any real-world rollout.
+
+These are proposed next steps; no production launch date or validated performance target is being claimed.
+
+## Competition submission
+
+ReorderLens AI is our concept for the **DemandIQ** challenge, which focuses on **demand forecasting and inventory intelligence for small and medium-sized enterprises**.
+
+Our submission video walks through the demonstration website, explains the inventory problem, and shows the decisions we want the eventual product to support. We are presenting the project at its **concept stage**, with the aim of developing and validating the full solution after our examinations.
+
+---
+
+**ReorderLens AI — From sales history to smarter restocking.**  
+**Team The White Hole** · International AI Builders Congress 2026
